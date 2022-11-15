@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+
+
+<div>
+	<h2>Job Operation</h2>
+	<button id='btnPauseAll'>Pause All</button>
+	<button id='btnResumeAll'>Resume All</button>
+</div>
+
+<div>
+	<h2>Create Directory</h2>
+	<button class='btnExecute' name='CreateDir'>Execute</button>
+	<button class='btnPause' name='CreateDir'>Pause</button>
+	<button class='btnResume' name='CreateDir'>Resume</button>
+</div>
+
+<div>
+	<h2>Create File</h2>
+	<button class='btnExecute' name='CreateFile'>Execute</button>
+	<button class='btnPause' name='CreateFile'>Pause</button>
+	<button class='btnResume' name='CreateFile'>Resume</button>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+<script>
+
+$(document).ready(function () {
+	
+	$('#btnPauseAll').click(function (e) {
+		activeJob(false);
+	});
+	
+	$('#btnResumeAll').click(function (e) {
+		activeJob(true);
+	});
+	
+	$('.btnExecute').click(function (e) {
+		$button = this;
+		execute($button.getAttribute('name'));
+	});
+	
+	$('.btnPause').click(function (e) {
+		$button = this;
+		pause($button.getAttribute('name'));
+	});
+	
+	$('.btnResume').click(function (e) {
+		$button = this;
+		resume($button.getAttribute('name'));
+	});
+});
+
+function activeJob(flag) {
+	var activeUrl = 'activeJob/' + flag
+	$.ajax({
+		url: activeUrl,
+		type: 'POST',
+		contentType : 'application/json; charset=utf-8',
+		error: function (xhr, textStatus, errorThrown) {
+			console.error('Fail');
+		},
+		success: function (data) {
+			console.log('success');
+		},
+	});
+}
+
+function execute(job) {
+	var executeUrl = 'execute/' + job
+	$.ajax({
+		url: executeUrl,
+		type: 'POST',
+		contentType : 'application/json; charset=utf-8',
+		error: function (xhr, textStatus, errorThrown) {
+			console.error('Fail');
+		},
+		success: function (data) {
+			console.log('success');
+		},
+	});
+}
+
+function pause(job) {
+	var pauseUrl = 'pause/' + job
+	$.ajax({
+		url: pauseUrl,
+		type: 'POST',
+		contentType : 'application/json; charset=utf-8',
+		error: function (xhr, textStatus, errorThrown) {
+			console.error('Fail');
+		},
+		success: function (data) {
+			console.log('success');
+		},
+	});
+}
+
+function resume(job) {
+	var resumeUrl = 'resume/' + job
+	$.ajax({
+		url: resumeUrl,
+		type: 'POST',
+		contentType : 'application/json; charset=utf-8',
+		error: function (xhr, textStatus, errorThrown) {
+			console.error('Fail');
+		},
+		success: function (data) {
+			console.log('success');
+		},
+	});
+}
+
+</script>
+
+
+</body>
+</html>
